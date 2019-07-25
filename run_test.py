@@ -10,29 +10,22 @@ from script import FBOGCrawler
 import timeit
 import matplotlib.pyplot as plt
 
-def run_script(processes, urls):
-    crawler = FBOGCrawler(processes, 1, urls)
-    time = timeit.timeit(crawler.main, number = 100)
-    print(f"Time:{time:.5f}", time)
+def run_script(processes):
+    crawler = FBOGCrawler(processes, 2)
+    time = timeit.timeit(crawler.main, number = 5)
+    print(time)
     return time
 
-def get_urls():
-    crawler = FBOGCrawler(1, 5, [])
-    return crawler.read_in()
-
 def test_processes(max_processes):
-    urls = get_urls()
-    times = [run_script(i, urls) for i in range(1, max_processes+1)]
+    times = [run_script(i) for i in range(1, max_processes+1)]
     plt.plot(range(1, max_processes+1), times)
+    print("MIN:", min(times), times.index(min(times)))
     plt.ylabel('time')
     plt.xlabel('processes')
     plt.show()
 
 if __name__ == "__main__":
-    test_processes(20)
-    
-
-    
+    test_processes(30)
     
     
     
