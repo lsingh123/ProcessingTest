@@ -6,15 +6,17 @@ Created on Wed Jul 24 12:58:07 2019
 @author: lavanyasingh
 """
 
-from multiprocessing import Pool, cpu_count
+from multiprocessing import Pool
 from bs4 import BeautifulSoup
 import csv
 from requests_html import HTMLSession
-import time
+import os
+os.chdir(os.path.dirname(os.getcwd()))
+
 
 class FBOGCrawler():
     
-    PATH = "/Users/lavanyasingh/Desktop/GSC2O19internet_archive/data/raw/"
+    PATH = os.getcwd() + "/data/raw/"
     
     def __init__(self, processes, num_urls):
         self.results, self.urls = [], []
@@ -71,16 +73,11 @@ class FBOGCrawler():
         print("WROTE ALL META")
     
     def main(self):
-        #after testing it looks like 17 is the optimal number of processes
         p = Pool(processes=self.processes)
-        #time1 = time.time()
         self.results = p.map(self.get_meta, self.urls)
         p.close()
         p.join()
         print(self.processes)
-        #time2 = time.time()
-        #print(f"Took {time2-time1:.2f} s")
-        #self.write_meta()
         self.session.close()
 
 
