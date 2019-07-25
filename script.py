@@ -16,7 +16,7 @@ import os
 
 class FBOGCrawler():
     
-    PATH = "/"
+    PATH = ""
     
     def __init__(self, processes, num_urls):
         self.results, self.urls = [], []
