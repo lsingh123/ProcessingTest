@@ -17,7 +17,7 @@ def run_script(processes):
     return time
 
 def test_processes(max_processes):
-    times = [run_script(i) for i in range(1, max_processes+1)]
+    times = [run_script(i) for i in range(3, max_processes+1)]
     plt.plot(range(1, max_processes+1), times)
     print("MIN:", min(times), times.index(min(times)))
     plt.ylabel('time')
@@ -25,7 +25,7 @@ def test_processes(max_processes):
     plt.show()
 
 if __name__ == "__main__":
-    test_processes(30)
+    test_processes(20)
     
     
     
